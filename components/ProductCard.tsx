@@ -8,7 +8,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
       <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden">

@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cartStore";
 import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 
 const checkoutSchema = z.object({
@@ -31,6 +31,10 @@ const checkoutSchema = z.object({
 });
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
+
+function generateOrderId() {
+  return `ORD-${Date.now()}`;
+}
 
 export default function CheckoutPage() {
   const { items, getTotal, clearCart } = useCartStore();
@@ -53,7 +57,7 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
-      const orderId = `ORD-${Date.now()}`;
+      const orderId = generateOrderId();
       const subtotal = getTotal();
       const shipping = 50;
       const tax = subtotal * 0.1;
